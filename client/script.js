@@ -694,28 +694,18 @@ $(function() {
 		
 		
 	// Style changer
-	$("#smallify").click(function(){
-		if (currentTheme == "bigcards")
-		{
-			changeThemeTo('smallcards');
+	var themes = ['bigcards', 'smallcards', 'customcards'];
+	for (var i in themes) {
+		if (currentTheme == themes[i]) {
+			$("#theme-list").append("<option selected>" + themes[i] + "</option>");
+		} else {
+			$("#theme-list").append("<option>" + themes[i] + "</option>");
 		}
-		else if (currentTheme == "smallcards")
-		{
-			changeThemeTo('bigcards');
-		}
-		/*else if (currentTheme == "nocards")
-		{
-			currentTheme = "bigcards";
-			$("link[title=cardsize]").attr("href", "css/bigcards.css");
-		}*/		
-		
+	}
+	$("#theme-list").change(function () {
+		changeThemeTo($(this).val());
 		sendAction('changeTheme', currentTheme);
-		
-	
-		return false;
 	});
-		
-		
 	
 	$('#icon-col').hover(
 		function() {
